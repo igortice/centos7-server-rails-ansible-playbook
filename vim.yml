@@ -1,11 +1,12 @@
 ---
-- hosts: localhost
+- name: VIM
+  hosts: localhost
   tasks:
     - name: Install vim
       yum:
         name: vim-enhanced
-        state: latest
-    
+        state: present
+
     - name: Config vimrc
       copy:
         src: ./vimrc

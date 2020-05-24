@@ -5,23 +5,26 @@
 - name: 'Config Rails Centos 7'
   hosts: localhost
 
-# UPGRADE SYSTEM
-- import_playbook: upgrade.yml
+# SYSTEM
+- import_playbook: system.yml
+
+# EPEL
+- import_playbook: epel.yml
 
 # EXTRAS
-- import_playbook: packages.yml
-
-# VIM
-- import_playbook: vim.yml
+- import_playbook: extras.yml
 
 # AJUSTES
 - import_playbook: ajustes.yml
 
-# EPEL
-- import_playbook: epel.yml
+# VIM
+- import_playbook: vim.yml
 
 # GIT
 - import_playbook: git.yml
 
 # NGINX
 - import_playbook: nginx.yml
+
+# NODE|YARN
+- import_playbook: nodeyarn.yml

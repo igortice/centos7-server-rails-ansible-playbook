@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: GIT
+  hosts: localhost
   tasks:
     - name: Download last version git
       yum:
@@ -9,4 +10,4 @@
     - name: Install git
       yum:
         name: git
-        state: latest
+        state: present

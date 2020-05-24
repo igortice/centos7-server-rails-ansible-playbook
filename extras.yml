@@ -1,12 +1,14 @@
 ---
-- hosts: localhost
+- name: EXTRAS
+  hosts: localhost
   tasks:
-    - name: Install bash-completion, nano, net-tools
+    - name: Install bash-completion, nano, net-tools, curl
       yum:
         name: '{{ packages }}'
-        state: latest
+        state: present
       vars:
         packages:
           - nano
           - bash-completion
           - net-tools
+          - curl
