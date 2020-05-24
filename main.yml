@@ -22,3 +22,6 @@
 
 # GIT
 - import_playbook: git.yml
+
+# NGINX
+- import_playbook: nginx.yml
