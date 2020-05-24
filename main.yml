@@ -16,3 +16,9 @@
 
 # AJUSTES
 - import_playbook: ajustes.yml
+
+# EPEL
+- import_playbook: epel.yml
+
+# GIT
+- import_playbook: git.yml

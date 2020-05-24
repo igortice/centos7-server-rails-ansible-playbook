@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Download last version git
+      yum:
+        name: https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
+        state: present
+
+    - name: Install git
+      yum:
+        name: git
+        state: latest
