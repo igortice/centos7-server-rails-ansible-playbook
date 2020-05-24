@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Disable SeLinux
+      selinux:
+        policy=targeted
+        state=disabled
+    
+    - name: Disable firewalld
+      systemd:
+        name=firewalld
+        state=stopped
+        enabled=no
+    
+    - name: Config Timezone
+      command: timedatectl set-timezone America/Fortaleza
+    
+    - set_fact:
+        system_settings_locale: pt_BR.utf-8
+    
+    - name: check if locale exists
+      shell: "locale -a | grep -i {{ system_settings_locale | regex_replace('-', '') | quote }}"
+      register: found_locale
+      changed_when: no
+      failed_when: no
+    
+    - name: create locale
+      command: "localedef -i {{ system_settings_locale | regex_replace('(.*)\\..*', '\\1') | quote }} -f {{ system_settings_locale | regex_replace('.*\\.(.*)', '\\1') | quote }} {{ system_settings_locale | quote }}"
+      when: found_locale.rc != 0
+    
+    - name: Config Timezone
+      command: localectl set-locale LANG=pt_BR.utf-8
+    
+    - name: Config Keymap
+      command: localectl set-keymap br-abnt2

@@ -1,0 +1,18 @@
+# yum -y update
+# yum install epel-release
+# yum --enablerepo=epel -y install ansible openssh-clients
+---
+- name: 'Config Rails Centos 7'
+  hosts: localhost
+
+# UPGRADE SYSTEM
+- import_playbook: upgrade.yml
+
+# EXTRAS
+- import_playbook: packages.yml
+
+# VIM
+- import_playbook: vim.yml
+
+# AJUSTES
+- import_playbook: ajustes.yml

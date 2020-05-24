@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install bash-completion, nano, net-tools
+      yum:
+        name: '{{ packages }}'
+        state: latest
+      vars:
+        packages:
+          - nano
+          - bash-completion
+          - net-tools
