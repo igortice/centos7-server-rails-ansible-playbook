@@ -2,7 +2,7 @@
 - name: EXTRAS
   hosts: localhost
   tasks:
-    - name: Install bash-completion, nano, net-tools, curl
+    - name: Install bash-completion, nano, net-tools, curl, yum-utils, centos-release-scl-rh
       yum:
         name: '{{ packages }}'
         state: present
@@ -12,3 +12,5 @@
           - bash-completion
           - net-tools
           - curl
+          - yum-utils
+          - centos-release-scl-rh

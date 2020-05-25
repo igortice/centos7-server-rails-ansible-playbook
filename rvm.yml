@@ -1,0 +1,16 @@
+---
+- name: RVM
+  hosts: localhost
+  tasks:
+    - name: RVM gpg2
+      command: gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    - name: RVM install
+      shell: curl -sL https://get.rvm.io | sudo bash -s stable
+      args:
+        warn: no
+    - name: RVM requirements
+      command: rvm requirements
+    - name: RVM install ruby 2.6.6
+      command: rvm install 2.6.6
+    - name: RVM default 2.6.6
+      command: 'rvm --default use ruby-2.6.6'

@@ -28,3 +28,9 @@
 
 # NODE|YARN
 - import_playbook: nodeyarn.yml
+
+# POSTGRES12
+- import_playbook: postgres12.yml
+
+# RVM
+- import_playbook: rvm.yml

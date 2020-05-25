@@ -15,7 +15,7 @@
       command: timedatectl set-timezone America/Fortaleza
 
     - set_fact:
-        system_settings_locale: pt_BR.utf-8
+        system_settings_locale: pt_BR.UTF-8
 
     - name: check if locale exists
       shell: "locale -a | grep -i {{ system_settings_locale | regex_replace('-', '') | quote }}"
@@ -28,7 +28,7 @@
       when: found_locale.rc != 0
 
     - name: Config Timezone
-      command: localectl set-locale LANG=pt_BR.utf-8
+      command: localectl set-locale LANG=pt_BR.UTF-8
 
     - name: Config Keymap
       command: localectl set-keymap br-abnt2

@@ -1,0 +1,42 @@
+---
+- name: POSTGRES12
+  hosts: localhost
+  tasks:
+    - name: Download postgresql12 packages
+      yum:
+        name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        state: present
+    - name: Install postgresql12-server
+      yum:
+        name: postgresql12-server
+        state: present
+    - name: Install postgresql12-contrib
+      yum:
+        name: postgresql12-contrib
+        state: present
+    - name: Install postgresql12-libs
+      yum:
+        name: postgresql12-libs
+        state: present
+    - name: Install depences postgresql12-devel
+      yum:
+        name: llvm-toolset-7-clang
+        state: present
+    - name: Install postgresql12-devel
+      yum:
+        name: postgresql12-devel
+        state: present
+    - name: Enable postgresql12
+      service:
+        name: postgresql-12
+        enabled: yes
+    - name: Initdb postgresql12
+      command: /usr/pgsql-12/bin/postgresql-12-setup initdb
+    - name: Start postgresql12
+      service:
+        name: postgresql-12
+        state: started
+    - name: Export bin postgresql12
+      shell: echo 'export PATH=$PATH:/usr/pgsql-12/bin/' >> /etc/bashrc && source /etc/bashrc
+      args:
+        warn: no
