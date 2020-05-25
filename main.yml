@@ -34,3 +34,6 @@
 
 # RVM
 - import_playbook: rvm.yml
+
+# USER DEPLOY
+- import_playbook: userdeployer.yml

@@ -18,7 +18,7 @@
       yum:
         name: postgresql12-libs
         state: present
-    - name: Install depences postgresql12-devel
+    - name: Install dependencies postgresql12-devel
       yum:
         name: llvm-toolset-7-clang
         state: present

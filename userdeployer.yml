@@ -1,0 +1,34 @@
+---
+- name: USER DEPLOYER
+  hosts: localhost
+  vars:
+    user: spu_modulos
+    url_authorized_keys: https://gitlab.sepog.fortaleza.ce.gov.br
+    user_authorized_keys: igor.rocha
+    ruby: ruby-2.6.6
+  tasks:
+    - name: Create user with ssh
+      user:
+        name: '{{ user }}'
+        generate_ssh_key: yes
+        ssh_key_bits: 4096
+        ssh_key_file: .ssh/id_rsa
+        ssh_key_comment: '$HOSTNAME@$USER'
+
+    - name: Adicionar permissão de execução ao diretório
+      command: 'chmod g+x /home/{{ user }}'
+
+    - name: Adicionar usuário ao grupo rvm
+      command: 'usermod -aG rvm {{ user }}'
+
+    - name: Adicionar nginx ao usuário
+      command: 'usermod -aG {{ user }} nginx'
+
+    - name: Set authorized keys from url
+      authorized_key:
+        user: '{{ user }}'
+        state: present
+        key: '{{ url_authorized_keys }}/{{ user_authorized_keys }}.keys'
+
+    - name: Create rvm gemset for user
+      shell: 'rvm use {{ ruby }} && rvm gemset create {{ user }}'
